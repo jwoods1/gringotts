@@ -703,7 +703,6 @@ defmodule Gringotts.Gateways.AuthorizeNet do
   end
   defp add_duty_fields(opts) do
     element(:duty, [
-      add_amount(opts[:duty][:amount]),
       element(:name, opts[:duty][:name]),
       element(:description, opts[:duty][:description])
     ])
