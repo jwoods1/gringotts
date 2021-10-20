@@ -558,7 +558,6 @@ defmodule Gringotts.Gateways.AuthorizeNet do
       add_payment_source(payment),
       add_invoice(opts),
       add_tax_fields(opts),
-      add_duty_fields(opts),
       add_shipping_fields(opts),
       add_po_number(opts),
       add_customer_info(opts)
@@ -648,17 +647,6 @@ defmodule Gringotts.Gateways.AuthorizeNet do
       element(:name, opts[:tax][:name]),
       element(:description, opts[:tax][:description])
     ])
-  end
-  defp add_duty_fields([duty: _] = opts) do
-    element(:duty, [
-      add_amount(opts[:duty][:amount]),
-      element(:name, opts[:duty][:name]),
-      element(:description, opts[:duty][:description])
-    ])
-  end
-  
-  defp add_duty_fields(_opts) do
-  
   end
 
   defp add_shipping_fields(opts) do
