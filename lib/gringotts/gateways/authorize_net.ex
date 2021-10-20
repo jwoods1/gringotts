@@ -649,13 +649,16 @@ defmodule Gringotts.Gateways.AuthorizeNet do
       element(:description, opts[:tax][:description])
     ])
   end
-
-  defp add_duty_fields(opts) do
+  defp add_duty_fields([duty: _] = opts) do
     element(:duty, [
       add_amount(opts[:duty][:amount]),
       element(:name, opts[:duty][:name]),
       element(:description, opts[:duty][:description])
     ])
+  end
+  
+  defp add_duty_fields(_opts) do
+  
   end
 
   defp add_shipping_fields(opts) do
@@ -697,8 +700,7 @@ defmodule Gringotts.Gateways.AuthorizeNet do
       element(:country, opts[:bill_to][:country])
     ])
   end
-
-  defp add_shipping_info(opts) do
+ defp add_shipping_info([ship_to: _] = opts) do
     element(:shipTo, [
       element(:firstName, opts[:ship_to][:first_name]),
       element(:lastName, opts[:ship_to][:last_name]),
@@ -709,6 +711,9 @@ defmodule Gringotts.Gateways.AuthorizeNet do
       element(:zip, opts[:ship_to][:zip]),
       element(:country, opts[:ship_to][:country])
     ])
+  end
+  defp add_shipping_info(_opts) do
+   
   end
 
   defp add_customer_ip(opts) do
